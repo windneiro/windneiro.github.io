@@ -36,6 +36,12 @@
     overflow-x: hidden;
   }
 
+  /* ── OUTER BG sides ── */
+  .page-outer {
+    background: var(--bg);
+    min-height: 100vh;
+  }
+
   /* ── SCANLINE OVERLAY ── */
   body::before {
     content: '';
@@ -53,13 +59,20 @@
   }
 
   /* ── TOP NAV ── */
-  nav {
+  .nav-outer {
     position: sticky;
     top: 0;
     z-index: 100;
     background: rgba(10,12,20,.92);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
+  }
+
+  nav {
+    max-width: 1280px;
+    margin: 0 auto;
+    border-left: 1px solid var(--border);
+    border-right: 1px solid var(--border);
     display: flex;
     align-items: center;
     gap: 0;
@@ -218,7 +231,7 @@
   /* ── GRID CARDS ── */
   .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 0;
   }
 
@@ -444,13 +457,25 @@
   }
   footer span { color: var(--accent); }
 
+  /* ── MAX WIDTH CONTAINER ── */
+  .page-wrap {
+    max-width: 1280px;
+    margin: 0 auto;
+    border-left: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+  }
+
   /* ── RESPONSIVE ── */
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
+    .grid { grid-template-columns: repeat(2, 1fr); }
+    .roadmap-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
     .hero         { grid-template-columns: 1fr; }
     .hero-left    { border-right: none; border-bottom: 1px solid var(--border); }
     .hero-title   { font-size: 36px; }
-    .roadmap-grid { grid-template-columns: 1fr; }
-    .contact-grid { grid-template-columns: 1fr; }
+    .grid         { grid-template-columns: 1fr; }
     nav a         { display: none; }
     nav a.nav-tg  { display: flex; }
   }
@@ -471,7 +496,7 @@
 </head>
 <body>
 
-<!-- ── NAV ── -->
+<div class="nav-outer">
 <nav>
   <div class="nav-logo">WIND<span>NEIRO</span></div>
   <a href="#skills">Skills</a>
@@ -479,6 +504,9 @@
   <a href="#roadmap">Roadmap</a>
   <a href="#contact" class="nav-tg">Contact</a>
 </nav>
+</div>
+
+<div class="page-wrap">
 
 <!-- ── HERO ── -->
 <section class="hero">
@@ -748,6 +776,7 @@
   <div>© 2026 <span>Windneiro</span> — All Rights Reserved</div>
   <div>BUILD <span>2026.1-RELEASE</span> · UPTIME <span>∞</span></div>
 </footer>
+</div><!-- /page-wrap -->
 
 </body>
 </html>
